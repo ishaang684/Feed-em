@@ -33,7 +33,7 @@ let foodImg
 // let enemyImg
 const cursorImg = newImage('cursor.png')
 const backImg = new Image()
-backImg.src = 'Food Web Game/Jungle Web/Jungle_Biome2.png'
+backImg.src = 'Food Web Game/Jungle Web/Jungle_Background.png'
 
 const enemyImg = newImage('Boa_Constrictor.png')
 const backWidth = 6000
