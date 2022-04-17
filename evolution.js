@@ -293,7 +293,7 @@ class Enemy {
     }
     draw()
     {
-        ctx.drawImage(enemyImg, background.x + this.x, background.y + this.y, Player.animalSize * 2, Player.animalSize * 2  )
+        ctx.drawImage(enemyImg, background.x + this.x, background.y + this.y, Player.animalSize, Player.animalSize)
     }
 }
 
@@ -302,7 +302,7 @@ const background = new Background;
 
 const foods = []
 const enemies = []
-for(let i = 0; i < 50; i++)
+for(let i = 0; i < 25; i++)
 {
     foods.push(new Food)
     if (i % 5 == 0)
