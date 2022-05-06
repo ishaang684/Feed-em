@@ -11,41 +11,33 @@ let sound = new Audio('Food Web Game/Jungle Web/collect_sound.wav');
 let scoreChange = 0
 let score = 0
 let lives = 3
-let evolveScore = 250
 
 document.body.style.backgroundColor = 'limegreen';
 
-let mouseX = 0;
-let mouseY = 0;
+let mouseX = mouseY = 0;
 addEventListener('mousemove', function(event){
     mouseX = event.clientX;
     mouseY = event.clientY;
 });
 
 // method for loading in images
-function JungleImage(src)
+function newImage(src)
 {
     var img = new Image();
     img.src = 'Food Web Game/Jungle Web/' + src;
     return img;
 }
 
-function OceanImage(src)
-{
-    var img = new Image();
-    img.src = 'Food Web Game/Ocean Web/' + src;
-    return img;
-}
-
 let playerImg
 let foodImg
-let enemyImg = JungleImage('Boa_Constrictor.png')
-const cursorImg = JungleImage('cursor.png')
+// let enemyImg
+const cursorImg = newImage('cursor.png')
 const backImg = new Image()
-backImg.src = 'Food Web Game/Jungle Web/Jungle_Biome2.png'
+backImg.src = 'Food Web Game/Jungle Web/Jungle_Biome3.png'
 
-const backWidth = 6000
-const backHeight = 4000
+const enemyImg = newImage('Boa_Constrictor.png')
+const backWidth = 3000
+const backHeight = 2000
 
 var empty = new Image()
 empty.src = 'Food Web Game/empty_heart.png'
@@ -63,43 +55,16 @@ const jungle2 = []
 jungle2.push('Sloth.png')
 jungle2.push('Macaw.png')
 jungle2.push('Spider_Monkey.png')
-jungle2.push('Golden_Lion_Tamarin.png')
-jungle2.push('Agouti.png')
-jungle2.push('Tapir.png')
 
 const jungle3 = []
-jungle3.push('Boa_Constrictor.png')
+jungle3.push('Golden_Lion_Tamarin.png')
+jungle3.push('Agouti.png')
+jungle3.push('Tapir')
 
 const jungle4 = []
 jungle4.push('Jaguar.png')
+jungle4.push('Boa_Constrictor.png')
 
-const ocean1 = []
-ocean1.push("Phytoplankton.png")
-
-const ocean2 = []
-ocean2.push('Plankton.png')
-ocean2.push('Corral.png')
-
-const ocean3 = []
-ocean3.push('Sea_Cucumber.png')
-ocean3.push('Sea_Turtle.png')
-ocean3.push('Whale_Shark.png')
-ocean3.push('Ray.png')
-ocean3.push('Sardine.png')
-
-const ocean4 = []
-ocean4.push('Octopus.png')
-ocean4.push('Tuna.png')
-
-const ocean5 = []
-ocean5.push('Moray_Eel.png')
-ocean5.push('Orca.png')
-ocean5.push('Gannet.png')
-ocean5.push('Sea_Lion.png')
-ocean5.push('Tiger_Shark.png')
-
-const ocean6 = []
-ocean6.push('Great_White_Shark.png')
 
 
 class Player {
@@ -115,38 +80,22 @@ class Player {
         this.spriteHeight = 96;
         this.currentAnimal = ''
 
-        if(biome == 1)
-        {
-            this.rand = Math.floor(Math.random() * jungle2.length)
-            playerImg = JungleImage(jungle2[this.rand])
+        this.rand1 = Math.floor(Math.random() * jungle2.length)
+        this.rand2 = Math.floor(Math.random() * jungle3.length)
+        this.rand3 = Math.floor(Math.random() * jungle4.length)
+        playerImg = newImage(jungle2[this.rand1])
 
-            switch(this.rand)
-            {
-                case 0:
-                    this.currentAnimal = 'Sloth/Folivora/It takes sloths 30 days to digest a leaf'
-                    break
-                case 1:
-                    this.currentAnimal = 'Blue and Yellow Macaw/Ara Ararauna/They can go up to 24km/h'
-                    break
-                case 2:
-                    this.currentAnimal = 'Spider Monkey/Ateles/There are 7 species that are classified as Spider Monkey'
-                    break
-                case 3:
-                    this.currentAnimal = 'Golden Lion Tamarin/Leontopitechus Rosalia/They can jump as high as 6 feet'
-                    break
-                case 4:
-                    this.currentAnimal = 'Agouti/Dasyprocta/They are the only ones who can open a Brazil Nut'
-                    break
-                case 5:
-                    this.currentAnimal = 'Tapir/Tapiridae/Their fossils date back to about 20 million years ago, and they have changed very little in that time'
-                    break
-            }
-        }
-        else if (biome == 2)
+        switch(this.rand1)
         {
-            this.currentAnimal = 'Jaguar/Panthera onca/Jaguars have the strongest bite out of all cats, which is doubled the amount of a tiger'
-            playerImg = OceanImage(ocean1[0])
-        }
+            case 0:
+                this.currentAnimal = 'Sloth/Folivora/It takes sloths 30 days to digest a leaf'
+                break
+            case 1:
+                this.currentAnimal = 'Blue and Yellow Macaw/Ara Ararauna/They can go up to 24km/h'
+                break
+            case 2:
+                this.currentAnimal = 'Spider Monkey/Ateles/There are 7 species that are classified as Spider Monkey'
+        } 
     }
     update()
     {
@@ -158,48 +107,39 @@ class Player {
         switch(biome)
         {
             case 1:
-                if (evolveScore - 10 < score && score < 2 * evolveScore)
+                if (290 < score && score < 600)
                 {
-                    this.currentAnimal = 'Boa Constrictor/Boa Constrictor/They have more than 100 teeth'
-                    playerImg = JungleImage(jungle3[0])
-                    enemyImg = JungleImage('Jaguar.png')
-                }
-                if (2*evolveScore - 10 < score)
-                {
-                    this.currentAnimal = 'Jaguar/Panthera onca/Jaguars have the strongest bite out of all cats, which is doubled the amount of a tiger'
-                    playerImg = JungleImage(jungle4[0])
-                }
-                break
+                    switch(this.rand2)
+                    {
+                        case 0:
+                            this.currentAnimal = 'Golden Lion Tamarin/Leontopitechus Rosalia/They can jump as high as 6 feet'
+                            playerImg = newImage(jungle3[this.rand2])
+                            break
+                        case 1:
+                            this.currentAnimal = 'Agouti/Dasyprocta/They are the only ones who can open a Brazil Nut'
+                            playerImg = newImage(jungle3[this.rand2])
+                            break
+                        case 2:
+                            this.currentAnimal = 'Tapir/Tapiridae/Their fossils date back to about 20 million years ago, and they have changed very little in that time'
+                            playerImg = newImage(jungle3[this.rand2])
+                            break
 
-            case 2:
-                this.currentAnimal = 'Jaguar/Panthera onca/Jaguars have the strongest bite out of all cats, which is doubled the amount of a tiger'
-                if (evolveScore - 10 < score && score < 2 * evolveScore)
-                {
-                    this.rand = Math.floor(Math.random() * ocean2.length)
-                    playerImg = OceanImage(ocean2[this.rand])
-
+                    }
                 }
-                if (2 * evolveScore - 10 < score && score < 3 * evolveScore)
+                if (590 < score)
                 {
-                    this.rand = Math.floor(Math.random() * ocean3.length)
-                    playerImg = OceanImage(ocean3[this.rand])
+                    switch(this.rand3)
+                    {
+                        case 0:
+                            this.currentAnimal = 'Jaguar/Panthera onca/Jaguars have the strongest bite out of all cats, which is doubled the amount of a tiger'
+                            playerImg = newImage(jungle4[this.rand3])
+                            break
+                        case 1:
+                            this.currentAnimal = 'Boa_Constrictor/Boa Constrictor/They have more than 100 teeth'
+                            playerImg = newImage(jungle4[this.rand3])
+                            break
+                    }
                 }
-                if (3 * evolveScore - 10 < score && score < 4 * evolveScore)
-                {
-                    this.rand = Math.floor(Math.random() * ocean4.length)
-                    playerImg = OceanImage(ocean4[this.rand])
-                }
-                if (4 * evolveScore - 10 < score && score < 5 * evolveScore)
-                {
-                    this.rand = Math.floor(Math.random() * ocean5.length)
-                    playerImg = OceanImage(ocean5[this.rand])
-                }
-                if (5 * evolveScore - 10 < score)
-                {
-                    this.rand = Math.floor(Math.random() * ocean6.length)
-                    playerImg = OceanImage(ocean6[this.rand])
-                }
-                break           
         }
     }
     draw()
@@ -278,7 +218,7 @@ class Food {
         this.rand1 = Math.floor(Math.random() * jungle1.length)
         this.rand2 = Math.floor(Math.random() * jungle2.length)
         this.rand3 = Math.floor(Math.random() * jungle3.length)
-        this.foodImg = JungleImage(jungle1[this.rand1])
+        this.foodImg = newImage(jungle1[this.rand1])
     }
     update()
     {
@@ -292,13 +232,13 @@ class Food {
             sound.play()
         }
 
-        if (evolveScore - 10 < score && score < 2 * evolveScore)
+        if (290 < score && score < 600)
         {
-            this.foodImg = JungleImage(jungle2[this.rand2])
+            this.foodImg = newImage(jungle2[this.rand2])
         }
-        if (2 * evolveScore - 10 < score)
+        if (590 < score)
         {
-            this.foodImg = JungleImage(jungle3[this.rand3])
+            this.foodImg = newImage(jungle3[this.rand3])
         }
     }
     draw()
@@ -353,7 +293,7 @@ class Enemy {
     }
     draw()
     {
-        ctx.drawImage(enemyImg, background.x + this.x, background.y + this.y, Player.animalSize * 2, Player.animalSize * 2  )
+        ctx.drawImage(enemyImg, background.x + this.x, background.y + this.y, Player.animalSize, Player.animalSize)
     }
 }
 
@@ -362,7 +302,7 @@ const background = new Background;
 
 const foods = []
 const enemies = []
-for(let i = 0; i < 50; i++)
+for(let i = 0; i < 25; i++)
 {
     foods.push(new Food)
     if (i % 5 == 0)
@@ -501,8 +441,6 @@ function animate(){
         playing = false
     }
 
-    ctx.fillText('Thanks to https://www.nationalgeographic.com', 0, canvas.height - canvas.height / 50)
-
     if (playing)
     {
     requestAnimationFrame(animate);
@@ -533,4 +471,4 @@ window.addEventListener('resize', function(){
   canvasPosition = canvas.getBoundingClientRect();
   mouseX = canvas.width / 2;
   mouseY = canvas.height / 2;
-}); 
+});
