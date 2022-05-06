@@ -533,4 +533,4 @@ window.addEventListener('resize', function(){
   canvasPosition = canvas.getBoundingClientRect();
   mouseX = canvas.width / 2;
   mouseY = canvas.height / 2;
-});
+}); 
