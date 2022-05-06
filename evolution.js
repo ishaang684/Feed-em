@@ -11,6 +11,7 @@ let sound = new Audio('Food Web Game/Jungle Web/collect_sound.wav');
 let scoreChange = 0
 let score = 0
 let lives = 3
+let evolveScore = 200
 
 document.body.style.backgroundColor = 'limegreen';
 
@@ -55,15 +56,15 @@ const jungle2 = []
 jungle2.push('Sloth.png')
 jungle2.push('Macaw.png')
 jungle2.push('Spider_Monkey.png')
+jungle2.push('Golden_Lion_Tamarin.png')
+jungle2.push('Agouti.png')
+jungle2.push('Tapir.png')
 
 const jungle3 = []
-jungle3.push('Golden_Lion_Tamarin.png')
-jungle3.push('Agouti.png')
-jungle3.push('Tapir')
+jungle3.push('Boa_Constrictor.png')
 
 const jungle4 = []
 jungle4.push('Jaguar.png')
-jungle4.push('Boa_Constrictor.png')
 
 
 
@@ -85,17 +86,30 @@ class Player {
         this.rand3 = Math.floor(Math.random() * jungle4.length)
         playerImg = newImage(jungle2[this.rand1])
 
-        switch(this.rand1)
-        {
-            case 0:
-                this.currentAnimal = 'Sloth/Folivora/It takes sloths 30 days to digest a leaf'
-                break
-            case 1:
-                this.currentAnimal = 'Blue and Yellow Macaw/Ara Ararauna/They can go up to 24km/h'
-                break
-            case 2:
-                this.currentAnimal = 'Spider Monkey/Ateles/There are 7 species that are classified as Spider Monkey'
-        } 
+        this.rand = Math.floor(Math.random() * jungle2.length)
+            playerImg = JungleImage(jungle2[this.rand])
+
+            switch(this.rand)
+            {
+                case 0:
+                    this.currentAnimal = 'Sloth/Folivora/It takes sloths 30 days to digest a leaf'
+                    break
+                case 1:
+                    this.currentAnimal = 'Blue and Yellow Macaw/Ara Ararauna/They can go up to 24km/h'
+                    break
+                case 2:
+                    this.currentAnimal = 'Spider Monkey/Ateles/There are 7 species that are classified as Spider Monkey'
+                    break
+                case 3:
+                    this.currentAnimal = 'Golden Lion Tamarin/Leontopitechus Rosalia/They can jump as high as 6 feet'
+                    break
+                case 4:
+                    this.currentAnimal = 'Agouti/Dasyprocta/They are the only ones who can open a Brazil Nut'
+                    break
+                case 5:
+                    this.currentAnimal = 'Tapir/Tapiridae/Their fossils date back to about 20 million years ago, and they have changed very little in that time'
+                    break
+            }
     }
     update()
     {
@@ -107,38 +121,16 @@ class Player {
         switch(biome)
         {
             case 1:
-                if (290 < score && score < 600)
+                if (evolveScore - 10 < score && score < 2 * evolveScore)
                 {
-                    switch(this.rand2)
-                    {
-                        case 0:
-                            this.currentAnimal = 'Golden Lion Tamarin/Leontopitechus Rosalia/They can jump as high as 6 feet'
-                            playerImg = newImage(jungle3[this.rand2])
-                            break
-                        case 1:
-                            this.currentAnimal = 'Agouti/Dasyprocta/They are the only ones who can open a Brazil Nut'
-                            playerImg = newImage(jungle3[this.rand2])
-                            break
-                        case 2:
-                            this.currentAnimal = 'Tapir/Tapiridae/Their fossils date back to about 20 million years ago, and they have changed very little in that time'
-                            playerImg = newImage(jungle3[this.rand2])
-                            break
-
-                    }
+                    this.currentAnimal = 'Boa Constrictor/Boa Constrictor/They have more than 100 teeth'
+                    playerImg = JungleImage(jungle3[0])
+                    enemyImg = JungleImage('Jaguar.png')
                 }
-                if (590 < score)
+                if (2*evolveScore - 10 < score)
                 {
-                    switch(this.rand3)
-                    {
-                        case 0:
-                            this.currentAnimal = 'Jaguar/Panthera onca/Jaguars have the strongest bite out of all cats, which is doubled the amount of a tiger'
-                            playerImg = newImage(jungle4[this.rand3])
-                            break
-                        case 1:
-                            this.currentAnimal = 'Boa_Constrictor/Boa Constrictor/They have more than 100 teeth'
-                            playerImg = newImage(jungle4[this.rand3])
-                            break
-                    }
+                    this.currentAnimal = 'Jaguar/Panthera onca/Jaguars have the strongest bite out of all cats, which is doubled the amount of a tiger'
+                    playerImg = JungleImage(jungle4[0])
                 }
         }
     }
