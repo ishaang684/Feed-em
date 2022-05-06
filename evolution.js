@@ -87,7 +87,7 @@ class Player {
         playerImg = newImage(jungle2[this.rand1])
 
         this.rand = Math.floor(Math.random() * jungle2.length)
-            playerImg = NewImage(jungle2[this.rand])
+            playerImg = newImage(jungle2[this.rand])
 
             switch(this.rand)
             {
@@ -124,13 +124,13 @@ class Player {
                 if (evolveScore - 10 < score && score < 2 * evolveScore)
                 {
                     this.currentAnimal = 'Boa Constrictor/Boa Constrictor/They have more than 100 teeth'
-                    playerImg = NewImage(jungle3[0])
-                    enemyImg = NewImage('Jaguar.png')
+                    playerImg = newImage(jungle3[0])
+                    enemyImg = newImage('Jaguar.png')
                 }
                 if (2*evolveScore - 10 < score)
                 {
                     this.currentAnimal = 'Jaguar/Panthera onca/Jaguars have the strongest bite out of all cats, which is doubled the amount of a tiger'
-                    playerImg = NewImage(jungle4[0])
+                    playerImg = newImage(jungle4[0])
                 }
         }
     }
